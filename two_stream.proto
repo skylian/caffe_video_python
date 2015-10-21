@@ -1,0 +1,41 @@
+syntax = "proto2";
+
+package two_stream;
+
+message DataParameter {
+    enum DataType {
+        RGB = 0;
+        FLOW = 1;
+    }
+    required DataType data_type = 1;
+    optional string data_name = 2 [default = "data"];
+    required string data_path = 3;
+    
+    optional string sample_method = 4 [default = "equal"];
+    optional int32 fpv = 5 [default = 25];
+    optional int32 length = 6 [default = 1];
+    
+    optional int32 interval = 7 [default = 0];
+    
+    repeated float mean_value = 8;
+    
+    optional string crop_method = 9 [default = "cc"];
+    repeated int32 crop_size = 10;
+    
+    optional bool flip = 11 [default = true];
+}
+
+message TestConfiguration {
+    enum Environment {
+        LOCAL = 0;
+        SLURM = 1;
+    }
+    optional Environment env = 1 [default = LOCAL];
+    repeated int32 gpu_id = 2;
+    required string exper_name = 3;
+    required string net_id = 4;
+    required string model_name = 8;
+    optional bool overwrite = 5 [default = false];
+    repeated string outputs = 6;
+    repeated DataParameter data_param = 7;
+}

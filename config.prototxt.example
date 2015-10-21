@@ -1,0 +1,37 @@
+env: LOCAL
+
+gpu_id: 0
+gpu_id: 1
+gpu_id: 2
+gpu_id: 3
+
+exper_name: "action_UCF101"
+#net_id: "vgg_16_flow_tvl1_nscales5_bound20_256x340"
+net_id: "vgg_16_rgb_256x340"
+model_name: "train_iter_10000"
+overwrite: false
+outputs: "prob"
+
+data_param {
+    data_type: RGB
+    data_name: "data"
+    #data_path: "../cache/flows_tvl1_nscales5_bound20/UCF-101_resized"
+    data_path: "../cache/frames/UCF-101_resized"
+
+    
+    sample_method: "equal"
+    fpv: 25
+    length: 1
+    interval: 0
+    
+    mean_value: 104
+    mean_value: 117
+    mean_value: 123
+
+    crop_method: "cc"
+    crop_size: 224
+    crop_size: 224
+    
+    flip: true
+}
+    
